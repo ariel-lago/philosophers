@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 14:47:44 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/02 19:43:28 by alago-ga         ###   ########.fr       */
+/*   Created: 2026/02/02 19:27:30 by alago-ga          #+#    #+#             */
+/*   Updated: 2026/02/02 19:29:54 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
-
-# include <unistd.h>
-# include <stdio.h>
-# include <pthread.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <limits.h>
+#ifndef PARSE_H
+# define PARSE_H
 
 # include "defines.h"
-# include "parse.h"
-# include "time.h"
-# include "routine.h"
+
+int	is_space_or_plus(char c);
+int	is_digit(char c);
+int	is_valid_input(const char *str);
+int	ft_atopi(const char *str);
 
 #endif

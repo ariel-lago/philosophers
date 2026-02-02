@@ -10,3 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME		= philo
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -pthreads
+
+SRC_DIR		= src
+OBJ_DIR		= obj
+INC_DIR		= includes
