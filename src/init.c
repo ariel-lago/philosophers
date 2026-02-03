@@ -1,0 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/03 19:11:57 by alago-ga          #+#    #+#             */
+/*   Updated: 2026/02/03 19:17:29 by alago-ga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+int	init_context(t_context *table, char **argv)
+{
+	int	i;
+
+	i = 0;
+	table->n_philo = (int)ft_atopl(argv[1]);
+	table->time_to_die = (int)ft_atopl(argv[2]);
+	table->time_to_eat = (int)ft_atopl(argv[3]);
+	table->time_to_sleep = (int)ft_atopl(argv[4]);
+	if (argv[5])
+		table->n_eat = (int)ft_atopl(argv[5]);
+	else
+		table->n_eat = -1;
+	table->philo_died = 0;
+	table->forks = malloc(sizeof(pthread_mutex_t) * table->n_philo);
+	if (!table->forks)
+		return (ERROR);
+	while (i < table->n_philo)
+		pthread_mutex_init(&table->forks[i++]);
+	table->philos = malloc(sizeof(t_philo) * table->n_philo);
+	if (!table->philos)
+		return (free(table->forks), ERROR);
+	return (0);
+}
+
+void	init_philos(t_context *table)
+{
+	int		i;
+
+	i = 0;
+	while (i <= table->n_philo)
+	{
+		table->philos[i].n = i + 1;
+		table->philos[i].meal_num = 0;
+		table->philos[i].last_meal = 0;
+		table->philos[i].left = &table->forks[i];
+		table->philos[i].right = &table->forks[(i + 1) % table->n_philo];
+		table->philos[i].dead = FALSE;
+		table->philos[i].table = table;
+		i++;
+	}
+}
