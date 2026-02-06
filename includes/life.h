@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   life.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 19:27:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/06 18:00:03 by alago-ga         ###   ########.fr       */
+/*   Created: 2026/02/06 17:25:28 by alago-ga          #+#    #+#             */
+/*   Updated: 2026/02/06 17:53:51 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef LIFE_H
+# define LIFE_H
 
 # include "defines.h"
 
-int		is_space_or_plus(char c);
-int		is_digit(char c);
-int		is_valid_input(const char *str);
-long	ft_atopi(const char *str);
+void	*life(void *philo);
 
 #endif

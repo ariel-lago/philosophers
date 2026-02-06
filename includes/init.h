@@ -17,5 +17,6 @@
 
 int		init_context(t_context *table, char **argv);
 void	init_philos(t_context *table);
+int		init_threads(t_context *table);
 
 #endif

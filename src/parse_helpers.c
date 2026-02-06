@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   parse_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 19:06:07 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/02 20:12:55 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:59:26 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	ft_atopl(const char	*str)
+long	ft_atopi(const char	*str)
 {
 	long	result;
 
@@ -52,7 +52,7 @@ int	is_valid_input(const char *str)
 			return (FALSE);
 		i++;
 	}
-	if (ft_atopl(str) == ERROR)
+	if (ft_atopi(str) == ERROR)
 		return (FALSE);
 	return (TRUE);
 }

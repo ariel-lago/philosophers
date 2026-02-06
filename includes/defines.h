@@ -32,14 +32,14 @@ typedef struct s_context {
 }	t_context;
 
 typedef struct s_philo {
-	int				n;
-	int				meal_num;
-	int				last_meal;
-	pthread_t		thread_id;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	*right;
-	int				dead;
-	s_context		table;
+	int					n;
+	int					meal_num;
+	int					last_meal;
+	pthread_t			thread_id;
+	pthread_mutex_t		*left;
+	pthread_mutex_t		*right;
+	int					dead;
+	t_context			table;
 }	t_philo;
 
 #endif

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   time_ms.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 19:27:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/06 18:00:03 by alago-ga         ###   ########.fr       */
+/*   Created: 2026/02/06 15:20:01 by alago-ga          #+#    #+#             */
+/*   Updated: 2026/02/06 18:01:23 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#include "philo.h"
 
-# include "defines.h"
+long	get_time_ms(void)
+{
+	struct timeval	time;
 
-int		is_space_or_plus(char c);
-int		is_digit(char c);
-int		is_valid_input(const char *str);
-long	ft_atopi(const char *str);
-
-#endif
+	if (gettimeofday(&time, NULL) == ERROR)
+		return (0);
+	return ((time.tv_sec * 1000000 + time.tv_usec) / 1000);
+}

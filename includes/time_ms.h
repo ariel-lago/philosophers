@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   time_ms.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 19:27:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/06 18:00:03 by alago-ga         ###   ########.fr       */
+/*   Created: 2026/02/06 16:41:11 by alago-ga          #+#    #+#             */
+/*   Updated: 2026/02/06 16:43:29 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef TIME_MS_H
+# define TIME_MS_H
 
 # include "defines.h"
 
-int		is_space_or_plus(char c);
-int		is_digit(char c);
-int		is_valid_input(const char *str);
-long	ft_atopi(const char *str);
+long	get_time_ms(void);
 
 #endif

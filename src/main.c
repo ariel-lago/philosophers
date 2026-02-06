@@ -6,7 +6,7 @@
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:46:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/03 19:13:52 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:17:43 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	main(int argc, char *argv[])
 			return (write(2, "Error: expected positive integers\n", 34), 1);
 		i++;
 	}
-	if (init_context(&table, *argv[]) == ERROR)
+	if (init_context(&table, argv) == ERROR)
 		return (write(2, "Error: malloc failed\n", 21), 1);
-	if (init_philosophers(&table);
+	init_philos(&table);
+	if (init_threads(&table) == ERROR)
+		return (write(2, "Error: failed to create thread\n", 31), 1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:47:44 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/03 19:14:35 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/06 16:39:08 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # include "defines.h"
 # include "parse.h"
-# include "time.h"
+# include "time_ms.h"
 # include "init.h"
-# include "routine.h"
+# include "life.h"
 
 #endif
