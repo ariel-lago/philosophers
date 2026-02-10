@@ -34,34 +34,44 @@ void	*did_philo_die(void *context)
 	}
 }
 
+int	check_and_print(t_philo *philo, char *str)
+{
+	long	print_time;
+	
+	if (philo->table->philo_died)
+		return (ERROR);
+	print_time = get_time_ms() - philo->table->start_time;
+	printf("%ld %d %s/n", print_time, philo->n, str);
+	return (0);
+}
+
 void	*life(void *philo)
 {
 	t_philo	*philos;
 
 	philos = (t_philo *)philo;
-	printf("soy el filo numero: %i\n", philos->n);
-	while (!philos->table->philo_died)
+	if (philos->n % 2 == 0)
+		usleep(1000);
+	while (1)
 	{
 		if (philos->table->philo_died)
 			break ;
-		printf("%ld %i is thinking\n", get_time_ms(), philos->n);
-		if (philos->n % 2)
-			usleep(6);
+		if (check_and_print(philos, "is thinking") == ERROR)
+			break ;
 		pthread_mutex_lock(philos->left);
-		if (philos->table->philo_died)
+		if (check_and_print(philos, "has taken a fork") == ERROR)
 			break ;
-		printf("%ld %i has taken a fork\n", get_time_ms(), philos->n);
 		pthread_mutex_lock(philos->right);
-		philos->last_meal = get_time_ms();
-		if (philos->table.philo_died)
+		if (check_and_print(philos, "has taken a fork") == ERROR)
 			break ;
-		printf("%ld %i is eating\n", get_time_ms(), philos->n);
+		philos->last_meal = get_time_ms();
+		if (check_and_print(philos, "is eating") == ERROR)
+			break ;
 		usleep(philos->table->time_to_eat);
 		pthread_mutex_unlock(philos->left);
 		pthread_mutex_unlock(philos->right);
-		if (philos->table->philo_died)
+		if (check_and_print(philos, "is sleeping") == ERROR)
 			break ;
-		printf("%ld %i is sleeping\n", get_time_ms(), philos->n);
 		usleep(philos->table->time_to_sleep);
 	}
 	return (NULL);
