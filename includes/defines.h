@@ -28,7 +28,7 @@ typedef struct s_context {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				n_eat;
-	int				start_time;
+	long			start_time;
 	int				philo_died;
 }	t_context;
 
