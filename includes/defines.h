@@ -38,8 +38,7 @@ typedef struct s_philo {
 	pthread_t			thread_id;
 	pthread_mutex_t		*left;
 	pthread_mutex_t		*right;
-	int					dead;
-	t_context			table;
+	t_context			*table;
 }	t_philo;
 
 #endif
