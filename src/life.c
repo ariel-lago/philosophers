@@ -12,10 +12,12 @@
 
 #include "philo.h"
 
-void	did_philo_die(t_context *table)
+void	*did_philo_die(void *context)
 {
 	int	i;
+	t_context	*table;
 
+	table = (t_context *)context;
 	while (1)
 	{
 		i = 0;
@@ -25,7 +27,7 @@ void	did_philo_die(t_context *table)
 			{
 				table->philo_died = TRUE;
 				printf("%ld %i has died/n", get_time_ms(), table->philos[i].n);
-				return ;
+				return (NULL);
 			}
 			i++;
 		}
