@@ -25,8 +25,8 @@ void	*did_philo_die(void *context)
 		{
 			if (get_time_ms() - table->time_to_die > table->philos[i].last_meal)
 			{
+				check_and_print(table->philos, "has died");
 				table->philo_died = TRUE;
-				printf("%ld %i has died/n", get_time_ms(), table->philos[i].n);
 				return (NULL);
 			}
 			i++;
