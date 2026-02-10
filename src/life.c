@@ -41,7 +41,7 @@ int	check_and_print(t_philo *philo, char *str)
 	if (philo->table->philo_died)
 		return (ERROR);
 	print_time = get_time_ms() - philo->table->start_time;
-	printf("%ld %d %s/n", print_time, philo->n, str);
+	printf("%ld %d %s", print_time, philo->n, str);
 	return (0);
 }
 
@@ -56,21 +56,21 @@ void	*life(void *philo)
 	{
 		if (philos->table->philo_died)
 			break ;
-		if (check_and_print(philos, "is thinking") == ERROR)
+		if (check_and_print(philos, "is thinking/n") == ERROR)
 			break ;
 		pthread_mutex_lock(philos->left);
-		if (check_and_print(philos, "has taken a fork") == ERROR)
+		if (check_and_print(philos, "has taken a fork/n") == ERROR)
 			break ;
 		pthread_mutex_lock(philos->right);
-		if (check_and_print(philos, "has taken a fork") == ERROR)
+		if (check_and_print(philos, "has taken a fork/n") == ERROR)
 			break ;
 		philos->last_meal = get_time_ms();
-		if (check_and_print(philos, "is eating") == ERROR)
+		if (check_and_print(philos, "is eating/n") == ERROR)
 			break ;
 		usleep(philos->table->time_to_eat);
 		pthread_mutex_unlock(philos->left);
 		pthread_mutex_unlock(philos->right);
-		if (check_and_print(philos, "is sleeping") == ERROR)
+		if (check_and_print(philos, "is sleeping/n") == ERROR)
 			break ;
 		usleep(philos->table->time_to_sleep);
 	}
