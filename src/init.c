@@ -60,6 +60,7 @@ int	init_threads(t_context *table)
 	int	i;
 	pthread_t	death_thread;
 
+	table->start_time = get_time_ms();
 	i = 0;
 	while (i < table->n_philo)
 	{
