@@ -69,7 +69,7 @@ int	init_threads(t_context *table)
 			return (ERROR);
 		i++;
 	}
-	if (pthread_create(death_thread, NULL, &did_philo_die, table) != 0)
+	if (pthread_create(&death_thread, NULL, &did_philo_die, table) != 0)
 		return (ERROR);
 	i = 0;
 	while (i < table->n_philo)
