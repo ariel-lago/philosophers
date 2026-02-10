@@ -12,6 +12,26 @@
 
 #include "philo.h"
 
+void	did_philo_die(t_context *table)
+{
+	int	i;
+
+	while (1)
+	{
+		i = 0;
+		while (i < table->n_philo)
+		{
+			if (get_time_ms() - table->time_to_die > table->philos[i].last_meal)
+			{
+				table->philo_died = TRUE;
+				printf("%ld %i has died/n", get_time_ms(), table->philos[i].n);
+				return ;
+			}
+			i++;
+		}
+	}
+}
+
 void	*life(void *philo)
 {
 	t_philo	*philos;
