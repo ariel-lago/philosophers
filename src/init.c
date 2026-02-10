@@ -49,7 +49,6 @@ void	init_philos(t_context *table)
 		table->philos[i].last_meal = 0;
 		table->philos[i].left = &table->forks[i];
 		table->philos[i].right = &table->forks[(i + 1) % table->n_philo];
-		table->philos[i].dead = FALSE;
 		table->philos[i].table = table;
 		i++;
 	}
