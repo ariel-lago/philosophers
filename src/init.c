@@ -58,6 +58,7 @@ void	init_philos(t_context *table)
 int	init_threads(t_context *table)
 {
 	int	i;
+	pthread_t	death_thread;
 
 	i = 0;
 	while (i < table->n_philo)
@@ -68,8 +69,11 @@ int	init_threads(t_context *table)
 			return (ERROR);
 		i++;
 	}
+	if (pthread_create(death_thread, NULL, &did_philo_die, table) != 0)
+		return (ERROR);
 	i = 0;
 	while (i < table->n_philo)
 		pthread_join(table->philos[i++].thread_id, NULL);
+	pthread_join(death_thread, NULL);
 	return (0);
 }
