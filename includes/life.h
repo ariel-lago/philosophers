@@ -15,6 +15,7 @@
 
 # include "defines.h"
 
+void  *did_philo_die(void *context);
 void	*life(void *philo);
 
 #endif
