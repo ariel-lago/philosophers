@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:47:28 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/03 15:03:08 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:40:02 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_context {
 	int				n_eat;
 	long			start_time;
 	int				philo_died;
+	pthread_mutex_t	philo_died_mutex;
 }	t_context;
 
 typedef struct s_philo {

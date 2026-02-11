@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:46:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/06 18:17:43 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:38:46 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	free_and_destroy(t_context *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->n_philo)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
+	free(table->philos);
+	pthread_mutex_destroy(&table->philo_died_mutex);
+	free(table->forks);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -31,5 +46,6 @@ int	main(int argc, char *argv[])
 	init_philos(&table);
 	if (init_threads(&table) == ERROR)
 		return (write(2, "Error: failed to create thread\n", 31), 1);
+	free_and_destroy(&table);
 	return (0);
 }

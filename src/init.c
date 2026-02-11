@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:11:57 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/06 18:21:15 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/11 23:50:00 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ int	init_context(t_context *table, char **argv)
 		table->n_eat = (int)ft_atopi(argv[5]);
 	else
 		table->n_eat = -1;
-	table->philo_died = 0;
+	table->philo_died = FALSE;
+	if (pthread_mutex_init(&table->philo_died_mutex, NULL) != 0)
+		return (ERROR);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->n_philo);
 	if (!table->forks)
 		return (ERROR);
 	while (i < table->n_philo)
-		pthread_mutex_init(&table->forks[i++], NULL);
+		if (pthread_mutex_init(&table->forks[i++], NULL) != 0)
+			return (free(table->forks), ERROR);
 	table->philos = malloc(sizeof(t_philo) * table->n_philo);
 	if (!table->philos)
 		return (free(table->forks), ERROR);
