@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:47:28 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/11 20:40:02 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/12 00:32:15 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ typedef struct s_context {
 	int				n_eat;
 	long			start_time;
 	int				philo_died;
-	pthread_mutex_t	philo_died_mutex;
+	pthread_mutex_t	write_mutex;
 }	t_context;
 
 typedef struct s_philo {
 	int					n;
 	int					meal_num;
 	int					last_meal;
+	pthread_mutex_t		meal_mutex;
 	pthread_t			thread_id;
 	pthread_mutex_t		*left;
 	pthread_mutex_t		*right;

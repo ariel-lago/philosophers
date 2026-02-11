@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:11:57 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/11 23:50:00 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/12 00:32:12 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_context(t_context *table, char **argv)
 	else
 		table->n_eat = -1;
 	table->philo_died = FALSE;
-	if (pthread_mutex_init(&table->philo_died_mutex, NULL) != 0)
+	if (pthread_mutex_init(&table->write_mutex, NULL) != 0)
 		return (ERROR);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->n_philo);
 	if (!table->forks)
@@ -50,6 +50,7 @@ void	init_philos(t_context *table)
 		table->philos[i].n = i + 1;
 		table->philos[i].meal_num = 0;
 		table->philos[i].last_meal = 0;
+		pthread_mutex_init(&table->philos[i].meal_mutex, NULL);
 		table->philos[i].left = &table->forks[i];
 		table->philos[i].right = &table->forks[(i + 1) % table->n_philo];
 		table->philos[i].table = table;
@@ -66,7 +67,7 @@ int	init_threads(t_context *table)
 	i = 0;
 	while (i < table->n_philo)
 	{
-		table->philos[i].last_meal = get_time_ms();
+		table->philos[i].last_meal = table->start_time;
 		if (pthread_create(&table->philos[i].thread_id,
 				NULL, &life, &table->philos[i]) != 0)
 			return (ERROR);
