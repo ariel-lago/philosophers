@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:42:40 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/11 23:53:36 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/11 23:56:38 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,19 @@ void	*life(void *philo)
 			break;
 		}
 		philos->last_meal = get_time_ms();
+		philos->meal_num++;
 		if (check_and_print(philos, "is eating") == ERROR)
 		{
 			pthread_mutex_unlock(philos->left);
 			pthread_mutex_unlock(philos->right);
 			break;
 		}
-		usleep(philos->table->time_to_eat);
+		usleep(philos->table->time_to_eat * 1000);
 		pthread_mutex_unlock(philos->left);
 		pthread_mutex_unlock(philos->right);
 		if (check_and_print(philos, "is sleeping") == ERROR)
 			break ;
-		usleep(philos->table->time_to_sleep);
+		usleep(philos->table->time_to_sleep * 1000);
 	}
 	return (NULL);
 }
