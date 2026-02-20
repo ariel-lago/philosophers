@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:42:40 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/12 00:32:04 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/20 20:13:38 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	*did_philo_die(void *context)
 {
 	int	i;
 	t_context	*table;
+	long	meal_temp;
 
 	table = (t_context *)context;
 	while (1)
@@ -23,7 +24,13 @@ void	*did_philo_die(void *context)
 		i = 0;
 		while (i < table->n_philo)
 		{
-			if ((get_time_ms() - table->philos[i].last_meal) >= table->time_to_die)
+			pthread_mutex_lock(&table->philos[i].meal_mutex);
+			meal_temp = table->philos[i].last_meal;
+			pthread_mutex_unlock(&table->philos[i].meal_mutex);
+//			printf("DEBUG: philo %d | now: %ld | meal_temp: %ld | diff: %ld | ttd: %d\n", 
+ //        table->philos[i].n, get_time_ms(), meal_temp, 
+   //      get_time_ms() - meal_temp, table->time_to_die);
+			if ((get_time_ms() - meal_temp) >= table->time_to_die)
 			{
 				check_and_print(&table->philos[i], "has died");
 				pthread_mutex_lock(&table->write_mutex);
@@ -33,6 +40,7 @@ void	*did_philo_die(void *context)
 			}
 			i++;
 		}
+		usleep(1000);
 	}
 }
 
@@ -69,6 +77,12 @@ void	*life(void *philo)
 			pthread_mutex_unlock(philos->left);
 			break;
 		}
+		if (philos->table->n_philo == 1)
+		{
+			ft_usleep(philos->table->time_to_die);
+			pthread_mutex_unlock(philos->left);
+			break;
+		}
 		pthread_mutex_lock(philos->right);
 		if (check_and_print(philos, "has taken a fork") == ERROR)
 		{
@@ -86,12 +100,12 @@ void	*life(void *philo)
 			pthread_mutex_unlock(philos->right);
 			break;
 		}
-		usleep(philos->table->time_to_eat * 1000);
+		ft_usleep(philos->table->time_to_eat);
 		pthread_mutex_unlock(philos->left);
 		pthread_mutex_unlock(philos->right);
 		if (check_and_print(philos, "is sleeping") == ERROR)
 			break ;
-		usleep(philos->table->time_to_sleep * 1000);
+		ft_usleep(philos->table->time_to_sleep);
 	}
 	return (NULL);
 }

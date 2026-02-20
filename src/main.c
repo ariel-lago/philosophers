@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:46:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/12 00:32:08 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/20 19:37:24 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	free_and_destroy(t_context *table)
 	while (i < table->n_philo)
 	{
 		pthread_mutex_destroy(&table->forks[i]);
+		pthread_mutex_destroy(&table->philos[i].meal_mutex);
 		i++;
 	}
-	free(table->philos);
 	pthread_mutex_destroy(&table->write_mutex);
-	pthread_mutex_destroy(&table->philos->meal_mutex);
+	free(table->philos);
 	free(table->forks);
 }
 

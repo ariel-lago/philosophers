@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:47:28 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/12 00:32:15 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/20 20:12:25 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_context {
 typedef struct s_philo {
 	int					n;
 	int					meal_num;
-	int					last_meal;
+	long				last_meal;
 	pthread_mutex_t		meal_mutex;
 	pthread_t			thread_id;
 	pthread_mutex_t		*left;
