@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:42:40 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/20 20:13:38 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/20 23:05:57 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 void	*did_philo_die(void *context)
 {
-	int	i;
+	int			i;
 	t_context	*table;
-	long	meal_temp;
+	long		meal_temp;
+	int			had_enough;
 
 	table = (t_context *)context;
 	while (1)
 	{
 		i = 0;
+		had_enough = 0;
 		while (i < table->n_philo)
 		{
 			pthread_mutex_lock(&table->philos[i].meal_mutex);
 			meal_temp = table->philos[i].last_meal;
+			if(table->n_eat != -1 && table->n_eat <= table->philos[i].meal_num)
+				had_enough++;
 			pthread_mutex_unlock(&table->philos[i].meal_mutex);
-//			printf("DEBUG: philo %d | now: %ld | meal_temp: %ld | diff: %ld | ttd: %d\n", 
- //        table->philos[i].n, get_time_ms(), meal_temp, 
-   //      get_time_ms() - meal_temp, table->time_to_die);
 			if ((get_time_ms() - meal_temp) >= table->time_to_die)
 			{
 				check_and_print(&table->philos[i], "has died");
@@ -39,6 +40,13 @@ void	*did_philo_die(void *context)
 				return (NULL);
 			}
 			i++;
+		}
+		if (table->n_philo == had_enough)
+		{
+			pthread_mutex_lock(&table->write_mutex);
+			table->philo_died = TRUE;
+			pthread_mutex_unlock(&table->write_mutex);
+			return (NULL);	
 		}
 		usleep(1000);
 	}
@@ -66,9 +74,16 @@ void	*life(void *philo)
 
 	philos = (t_philo *)philo;
 	if (philos->n % 2 == 0)
-		usleep(1000);
+		ft_usleep(philos->table->time_to_eat / 2);
 	while (1)
 	{
+		pthread_mutex_lock(&philos->meal_mutex);
+		if(philos->table->n_eat != -1 && philos->table->n_eat <= philos->meal_num)
+		{
+			pthread_mutex_unlock(&philos->meal_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&philos->meal_mutex);
 		if (check_and_print(philos, "is thinking") == ERROR)
 			break ;
 		pthread_mutex_lock(philos->left);

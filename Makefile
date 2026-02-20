@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alago-ga <alago-ga@student.42berlin.d>     +#+  +:+       +#+         #
+#    By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/02 14:47:04 by alago-ga          #+#    #+#              #
-#    Updated: 2026/02/06 18:00:39 by alago-ga         ###   ########.fr        #
+#    Updated: 2026/02/20 20:45:08 by ariellago        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -pthread -g
+CFLAGS		= -Wall -Wextra -Werror -pthread -g -fsanitize=thread
 
 SRC_DIR		= src
 OBJ_DIR		= obj

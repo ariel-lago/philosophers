@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:11:57 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/12 00:32:12 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/20 23:11:45 by ariellago        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_philos(t_context *table)
 	{
 		table->philos[i].n = i + 1;
 		table->philos[i].meal_num = 0;
-		table->philos[i].last_meal = 0;
+		table->philos[i].last_meal = get_time_ms();
 		pthread_mutex_init(&table->philos[i].meal_mutex, NULL);
 		table->philos[i].left = &table->forks[i];
 		table->philos[i].right = &table->forks[(i + 1) % table->n_philo];
