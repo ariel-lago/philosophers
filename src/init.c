@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:11:57 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/20 23:11:45 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/23 15:41:08 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_philos(t_context *table)
 
 int	init_threads(t_context *table)
 {
-	int	i;
+	int			i;
 	pthread_t	death_thread;
 
 	table->start_time = get_time_ms();

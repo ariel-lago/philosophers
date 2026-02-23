@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:20:01 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/20 19:53:10 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/23 15:41:38 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	ft_usleep(long ms)
 	long	start;
 
 	start = get_time_ms();
-	while(get_time_ms() - start < ms)
+	while (get_time_ms() - start < ms)
 		usleep(500);
 }

@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:46:30 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/20 19:37:24 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/23 15:40:43 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	main(int argc, char *argv[])
 		return (write(2, "Error: malloc failed\n", 21), 1);
 	init_philos(&table);
 	if (init_threads(&table) == ERROR)
-		return (free_and_destroy(&table), write(2, "Error: failed to create thread\n", 31), 1);
+		return (free_and_destroy(&table), \
+		write(2, "Error: failed to create thread\n", 31), 1);
 	free_and_destroy(&table);
 	return (0);
 }

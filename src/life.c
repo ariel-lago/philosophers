@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:42:40 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/20 23:05:57 by ariellago        ###   ########.fr       */
+/*   Updated: 2026/02/23 15:42:59 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*did_philo_die(void *context)
 		{
 			pthread_mutex_lock(&table->philos[i].meal_mutex);
 			meal_temp = table->philos[i].last_meal;
-			if(table->n_eat != -1 && table->n_eat <= table->philos[i].meal_num)
+			if (table->n_eat != -1 && table->n_eat <= table->philos[i].meal_num)
 				had_enough++;
 			pthread_mutex_unlock(&table->philos[i].meal_mutex);
 			if ((get_time_ms() - meal_temp) >= table->time_to_die)
@@ -46,7 +46,7 @@ void	*did_philo_die(void *context)
 			pthread_mutex_lock(&table->write_mutex);
 			table->philo_died = TRUE;
 			pthread_mutex_unlock(&table->write_mutex);
-			return (NULL);	
+			return (NULL);
 		}
 		usleep(1000);
 	}
@@ -55,7 +55,7 @@ void	*did_philo_die(void *context)
 int	check_and_print(t_philo *philo, char *str)
 {
 	long	print_time;
-	
+
 	pthread_mutex_lock(&philo->table->write_mutex);
 	if (philo->table->philo_died)
 	{
@@ -78,7 +78,8 @@ void	*life(void *philo)
 	while (1)
 	{
 		pthread_mutex_lock(&philos->meal_mutex);
-		if(philos->table->n_eat != -1 && philos->table->n_eat <= philos->meal_num)
+		if (philos->table->n_eat != -1 \
+			&& philos->table->n_eat <= philos->meal_num)
 		{
 			pthread_mutex_unlock(&philos->meal_mutex);
 			break ;
@@ -90,20 +91,20 @@ void	*life(void *philo)
 		if (check_and_print(philos, "has taken a fork") == ERROR)
 		{
 			pthread_mutex_unlock(philos->left);
-			break;
+			break ;
 		}
 		if (philos->table->n_philo == 1)
 		{
 			ft_usleep(philos->table->time_to_die);
 			pthread_mutex_unlock(philos->left);
-			break;
+			break ;
 		}
 		pthread_mutex_lock(philos->right);
 		if (check_and_print(philos, "has taken a fork") == ERROR)
 		{
 			pthread_mutex_unlock(philos->left);
 			pthread_mutex_unlock(philos->right);
-			break;
+			break ;
 		}
 		pthread_mutex_lock(&philos->meal_mutex);
 		philos->last_meal = get_time_ms();
@@ -113,7 +114,7 @@ void	*life(void *philo)
 		{
 			pthread_mutex_unlock(philos->left);
 			pthread_mutex_unlock(philos->right);
-			break;
+			break ;
 		}
 		ft_usleep(philos->table->time_to_eat);
 		pthread_mutex_unlock(philos->left);
