@@ -12,7 +12,7 @@
 
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -pthread -g -fsanitize=thread
+CFLAGS		= -Wall -Wextra -Werror -pthread -g
 
 SRC_DIR		= src
 OBJ_DIR		= obj
