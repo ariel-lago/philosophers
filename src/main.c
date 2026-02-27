@@ -12,6 +12,9 @@
 
 #include "philo.h"
 
+/*
+Destroys write, fork and meal mutexes and frees the philo and fork arrays.
+*/
 void	free_and_destroy(t_context *table)
 {
 	int	i;

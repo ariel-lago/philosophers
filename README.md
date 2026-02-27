@@ -19,14 +19,14 @@ This project is written in C, it works with threads and mutexes to generate a si
 A certain number of philosophers sit around a table with the goal of eating spaghetti. 
 There's one fork per philosopher but they need two forks to eat, so they have to go into a routine where they sleep and think while they wait for two forks to be free for eating. 
 After eating they put the two forks on the table and go to sleep, so other philosophers can eat.
-In certain ocasions a philosopher will be unable to find two free foks on time and will starve.
+In certain occasions a philosopher will be unable to find two free forks on time and will starve.
 In this cases the simulation will end.
 
 ### Implementation
 - Each philosopher runs in its own thread.
 - Each fork is protected by a mutex.
 - There's a thread that perpetually checks whether any philosopher has starved or eaten enough meals.
-- There's a mutex that ensures that the philosopher thread messages are printed one my one.
+- There's a mutex that ensures that the philosopher thread messages are printed one by one.
 - Even numbered philosophers start with a small delay in order to avoid deadlocks.
 - ft_usleep uses a loop that makes it more precise than usleep.
 
@@ -36,13 +36,13 @@ Now you can run the program by writing *./philo* followed by four or five argume
 ### (1) Number of philosophers
 How many philosophers and forks will be at the table.
 ### (2) Time to die
-How many miliseconds can a philosopher go without starving.
+How many milliseconds a philosopher can go without starving.
 ### (3) Time to eat
-How many miliseconds they take to eat.
+How many milliseconds they take to eat.
 ### (4) Time to sleep
-How many miliseconds they sleep for.
+How many milliseconds they sleep for.
 ### (5) Number of times each philosopher must eat
-This argument is optional. If all philosophers have eaten the amount of times they must eat, the simmulation stops
+This argument is optional. If all philosophers have eaten the amount of times they must eat, the simulation stops
 
 ## Resources
 ### References

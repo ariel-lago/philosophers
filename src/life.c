@@ -12,6 +12,10 @@
 
 #include "philo.h"
 
+/*
+Checks if any philosopher has died since the last meal.
+Checks how many philos have eaten enough meals
+*/
 static int	check_on_philo(t_context *table, int *had_enough)
 {
 	int			i;
@@ -38,6 +42,10 @@ static int	check_on_philo(t_context *table, int *had_enough)
 	return (0);
 }
 
+/*
+Calls check_on_philo on loop untill someone dies or all philos ate enough
+Sets philo_died to true
+*/
 void	*did_philo_die(void *context)
 {
 	t_context	*table;
@@ -60,6 +68,9 @@ void	*did_philo_die(void *context)
 	}
 }
 
+/*
+Prints message for what each philo is doing after checking if the simmulation is still happening
+*/
 int	check_and_print(t_philo *philo, char *str)
 {
 	long	print_time;
@@ -76,6 +87,13 @@ int	check_and_print(t_philo *philo, char *str)
 	return (0);
 }
 
+/*
+Locks forks on both sides.
+Updates the time of last meal and whe number of meals.
+Waits the time it takes to eat
+Unlocks the forks
+Also handles the case of only one philo.
+*/
 static int	philo_eats(t_philo *philos)
 {
 	pthread_mutex_lock(philos->left);
@@ -103,6 +121,10 @@ static int	philo_eats(t_philo *philos)
 	return (0);
 }
 
+/*
+The philosopers routine. Loops through thinking, eating and sleeping.
+Even philosophers start with small delay.
+*/
 void	*life(void *philo)
 {
 	t_philo	*philos;

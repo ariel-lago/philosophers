@@ -12,6 +12,12 @@
 
 #include "philo.h"
 
+/*
+If init fails this function:
+Destroys the first fork mutexes in the forks array.
+Frees the array.
+Destroys the write mutex.
+*/
 static void	clean_forks(t_context *table, int dirty_forks)
 {
 	while (dirty_forks-- > 0)
@@ -20,6 +26,11 @@ static void	clean_forks(t_context *table, int dirty_forks)
 	pthread_mutex_destroy(&table->write_mutex);
 }
 
+/*
+Parses args into Table struct
+Allocates memory for forks and philo arrays
+Initializes mutexes (write_mutex and forks)
+*/
 int	init_context(t_context *table, char **argv)
 {
 	int	i;
@@ -48,6 +59,10 @@ int	init_context(t_context *table, char **argv)
 	return (0);
 }
 
+/*
+Sets the initial values for the philo struct.
+Initializes the meal mutex.
+*/
 void	init_philos(t_context *table)
 {
 	int		i;
@@ -66,6 +81,11 @@ void	init_philos(t_context *table)
 	}
 }
 
+/*
+Starts one thread per philosopher.
+Starts the monitor thread.
+Joins the threads so main waits for them to finish
+*/
 int	init_threads(t_context *table)
 {
 	int			i;
