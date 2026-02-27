@@ -6,11 +6,19 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:11:57 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/23 15:41:08 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:04:53 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	clean_forks(t_context *table, int dirty_forks)
+{
+	while (dirty_forks-- > 0)
+		pthread_mutex_destroy(&table->forks[dirty_forks]);
+	free(table->forks);
+	pthread_mutex_destroy(&table->write_mutex);
+}
 
 int	init_context(t_context *table, char **argv)
 {
@@ -30,13 +38,13 @@ int	init_context(t_context *table, char **argv)
 		return (ERROR);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->n_philo);
 	if (!table->forks)
-		return (ERROR);
+		return (pthread_mutex_destroy(&table->write_mutex), ERROR);
 	while (i < table->n_philo)
 		if (pthread_mutex_init(&table->forks[i++], NULL) != 0)
-			return (free(table->forks), ERROR);
+			return (clean_forks(table, i - 1), ERROR);
 	table->philos = malloc(sizeof(t_philo) * table->n_philo);
 	if (!table->philos)
-		return (free(table->forks), ERROR);
+		return (clean_forks(table, table->n_philo), ERROR);
 	return (0);
 }
 
