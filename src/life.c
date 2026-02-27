@@ -6,7 +6,7 @@
 /*   By: ariellago <ariellago@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 15:42:40 by alago-ga          #+#    #+#             */
-/*   Updated: 2026/02/24 21:05:14 by alago-ga         ###   ########.fr       */
+/*   Updated: 2026/02/27 18:08:17 by alago-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	*did_philo_die(void *context)
 }
 
 /*
-Prints message for what each philo is doing after checking if the simmulation is still happening
+Prints message for what each philo is doing
+Checks if the simmulation is still happening
 */
 int	check_and_print(t_philo *philo, char *str)
 {
